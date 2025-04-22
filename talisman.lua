@@ -1039,7 +1039,15 @@ if SMODS and SMODS.calculate_individual_effect then
     return smce(effect, ...)
   end
 end
-Talisman_localization = assert(load(nativefs.read(lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua")))()
+
+local talismanloc = init_localization
+function init_localization()
+	local Talisman_localization = assert(load(nativefs.read(lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua")))()
+	for k, v in pairs(Talisman_localization) do
+		G.localization.misc.dictionary[k] = v
+	end
+	talismanloc()
+end
 --some debugging functions
 --[[local callstep=0
 function printCallerInfo()
