@@ -14,7 +14,8 @@ return {
         talisman_string_H = "Calculations last played hand: ",
         talisman_string_I = "Unknown",
 
+        --These don't work out of the box because they would be called too early, find a workaround later?
+        talisman_error_A = "Could not find proper Talisman folder.\nPlease make sure the folder for Talisman is named exactly "Talisman" and not "Talisman-main" or anything else.",
         talisman_error_B = "[Talisman] Error unpacking string: ",
         talisman_error_C = "[Talisman] Error loading string: ",
-        --localize("talisman_string_E")
 }
