@@ -1,5 +1,5 @@
 return {
-        test = "j"
+        test = "j",
         talisman_vanilla = "Vanilla (e308)",
         talisman_bignum = "BigNum (ee308)",
         talisman_omeganum = "OmegaNum",
