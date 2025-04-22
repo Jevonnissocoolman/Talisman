@@ -1,4 +1,12 @@
 return {
+        descriptions = {
+                Mod = { 
+                        Talisman = {
+                                name = "Talisman",
+                                text = {"A mod that increases Balatro's score limit and skips scoring animations."},
+                        }
+                }
+        }, 
         test = "q",
         talisman_vanilla = 'Vanilla (e308)',
         talisman_bignum = 'BigNum (ee308)',
