@@ -1,5 +1,6 @@
 return {
         test = "j",
+        mod_desc = "A mod that increases Balatro's score limit and skips scoring animations.",
         talisman_vanilla = 'Vanilla (e308)',
         talisman_bignum = 'BigNum (ee308)',
         talisman_omeganum = 'OmegaNum',
