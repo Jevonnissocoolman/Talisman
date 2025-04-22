@@ -1,3 +1,7 @@
 return {
-        boi = "boi"
+        misc = {
+                dictionary = {
+                        boi = "boi"
+                }
+        }
 }
