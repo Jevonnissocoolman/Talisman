@@ -6,6 +6,28 @@ if not nativefs.getInfo(lovely.mod_dir .. "/Talisman") then
         'Could not find proper Talisman folder.\nPlease make sure the folder for Talisman is named exactly "Talisman" and not "Talisman-main" or anything else.')
 end
 
+-- "Borrowed" from Trance
+function load_file_with_fallback2(a, aa)
+    local success, result = pcall(function() return assert(load(nativefs.read(a)))() end)
+    if success then
+        return result
+    end
+    local fallback_success, fallback_result = pcall(function() return assert(load(nativefs.read(aa)))() end)
+    if fallback_success then
+        return fallback_result
+    end
+    return "sus"
+end
+
+local talismanloc = init_localization
+function init_localization()
+	local abc = load_file_with_fallback2((lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua"), (lovely.mod_dir .. "/Talisman/talisman_localization/en-us.lua"))
+	for k, v in pairs(abc or {}) do
+		G.localization.misc.dictionary[k] = v
+	end
+	talismanloc()
+end
+
 Talisman = {config_file = {disable_anims = true, break_infinity = "omeganum", score_opt_id = 2}}
 if nativefs.read(lovely.mod_dir.."/Talisman/config.lua") then
     Talisman.config_file = STR_UNPACK(nativefs.read(lovely.mod_dir.."/Talisman/config.lua"))
@@ -1040,26 +1062,6 @@ if SMODS and SMODS.calculate_individual_effect then
   end
 end
 
--- "Borrowed" from Trance
-function load_file_with_fallback2(a, aa)
-    local success, result = pcall(function() return assert(load(nativefs.read(a)))() end)
-    if success then
-        return result
-    end
-    local fallback_success, fallback_result = pcall(function() return assert(load(nativefs.read(aa)))() end)
-    if fallback_success then
-        return fallback_result
-    end
-end
-
-local talismanloc = init_localization
-function init_localization()
-	local abc = load_file_with_fallback2((lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua"), (lovely.mod_dir .. "/Talisman/talisman_localization/en-us.lua"))
-	for k, v in pairs(abc or {}) do
-		G.localization.misc.dictionary[k] = v
-	end
-	talismanloc()
-end
 --some debugging functions
 --[[local callstep=0
 function printCallerInfo()
