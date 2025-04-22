@@ -804,15 +804,14 @@ function safe_str_unpack(str)
     setfenv(chunk, {Big = Big, BigMeta = BigMeta, OmegaMeta = OmegaMeta, to_big = to_big, inf = 1.79769e308})  -- Use an empty environment to prevent access to potentially harmful functions
     local success, result = pcall(chunk)
     if success then
-	print(localize("talisman_error_B") .. result)
     return result
     else
-    print(localize("talisman_error_B") .. result)
+    print("[Talisman] Error unpacking string: " .. result)
     print(tostring(str))
     return nil
     end
   else
-    print(localize("talisman_error_C") .. err)
+    print("[Talisman] Error loading string: " .. err)
     print(tostring(str))
     return nil
   end
