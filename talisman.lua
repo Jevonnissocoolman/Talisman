@@ -15,8 +15,8 @@ end
 
 local talismanloc = init_localization
 function init_localization()
-	local Talisman_localization = load_file_with_fallback2((lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua"), (lovely.mod_dir .. "/Talisman/talisman_localization/" .. ("en-us") .. ".lua"))
-	for k, v in pairs(Talisman_localization) do
+	local abc = load_file_with_fallback2((lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua"), (lovely.mod_dir .. "/Talisman/talisman_localization/" .. ("en-us") .. ".lua"))
+	for k, v in pairs(abc or {}) do
 		G.localization.misc.dictionary[k] = v
 	end
 	talismanloc()
