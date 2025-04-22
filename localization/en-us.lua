@@ -1,4 +1,9 @@
 return {
+        descriptions = {
+                Mod = {
+                        Talisman = 'A mod that increases Balatro's score limit and skips scoring animations. pee pee poo poo'
+                }
+        }
         test = "j",
         talisman_vanilla = 'Vanilla (e308)',
         talisman_bignum = 'BigNum (ee308)',
