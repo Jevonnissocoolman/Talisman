@@ -1,32 +1,13 @@
 local lovely = require("lovely")
 local nativefs = require("nativefs")
 
--- "borrowed" from Trance
-function talisman_load_file_with_fallback(primary_path, fallback_path)
-    local success, result = pcall(function() return assert(load(nativefs.read(primary_path)))() end)
-    if success then
-        return result
-    end
-    local fallback_success, fallback_result = pcall(function() return assert(load(nativefs.read(fallback_path)))() end)
-    if fallback_success then
-        return fallback_result
-    end
-end
--- these localization entires are called before the place they are usually created is initialized yet so they are created/pulled from a different place
-Talisman_misc_loc = talisman_load_file_with_fallback(
-	lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua",
-    	lovely.mod_dir .. "/Talisman/talisman_localization/" .. ("en-us") .. ".lua",
-)
-for k, v in pairs(Talisman_misc_loc) do
-	if 
-		k == "talisman_error_B"
-		or k == "talisman_error_C"
-	then
-		G.PROFILES[G.SETTINGS.profile].talisman_localization[k] = v
+local talismanloc = init_localization
+function init_localization()
+	local Talisman_localization = assert(load(nativefs.read(lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua")))()
+	for k, v in pairs(Talisman_localization) do
+		G.localization.misc.dictionary[k] = v
 	end
-end
-function localize2(args)
-	return G.PROFILES[G.SETTINGS.profile].talisman_localization[args] or 'ERROR'
+	talismanloc()
 end
 
 if not nativefs.getInfo(lovely.mod_dir .. "/Talisman") then
@@ -823,15 +804,15 @@ function safe_str_unpack(str)
     setfenv(chunk, {Big = Big, BigMeta = BigMeta, OmegaMeta = OmegaMeta, to_big = to_big, inf = 1.79769e308})  -- Use an empty environment to prevent access to potentially harmful functions
     local success, result = pcall(chunk)
     if success then
-	print(localize2("talisman_error_B") .. result)
+	print(localize("talisman_error_B") .. result)
     return result
     else
-    print(localize2("talisman_error_B") .. result)
+    print(localize("talisman_error_B") .. result)
     print(tostring(str))
     return nil
     end
   else
-    print(localize2("talisman_error_C") .. err)
+    print(localize("talisman_error_C") .. err)
     print(tostring(str))
     return nil
   end
@@ -1069,17 +1050,6 @@ if SMODS and SMODS.calculate_individual_effect then
   end
 end
 
-local talismanloc = init_localization
-function init_localization()
-	local temp = talisman_load_file_with_fallback(
-    		lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua",
-    		lovely.mod_dir .. "/Talisman/talisman_localization/" .. ("en-us") .. ".lua",
-	)
-	for k, v in pairs(temp) do
-		G.localization.misc.dictionary[k] = v
-	end
-	talismanloc()
-end
 --some debugging functions
 --[[local callstep=0
 function printCallerInfo()
