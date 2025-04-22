@@ -1,9 +1,21 @@
 local lovely = require("lovely")
 local nativefs = require("nativefs")
 
+-- "Borrowed" from Trance
+function load_file_with_fallback2(primary_path, fallback_path)
+    local success, result = pcall(function() return assert(load(nativefs.read(primary_path)))() end)
+    if success then
+        return result
+    end
+    local fallback_success, fallback_result = pcall(function() return assert(load(nativefs.read(fallback_path)))() end)
+    if fallback_success then
+        return fallback_result
+    end
+end
+
 local talismanloc = init_localization
 function init_localization()
-	local Talisman_localization = assert(load(nativefs.read(lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua")))()
+	local Talisman_localization = load_file_with_fallback2((lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua"), (lovely.mod_dir .. "/Talisman/talisman_localization/" .. ("en-us") .. ".lua"))
 	for k, v in pairs(Talisman_localization) do
 		G.localization.misc.dictionary[k] = v
 	end
