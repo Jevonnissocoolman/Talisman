@@ -26,7 +26,7 @@ function init_localization()
 	)
 	for k, v in pairs(abc) do
 		if k == "mod_desc" then
-			G.localization.descriptions.Mod["Talisman"] = v
+			(G.localization.descriptions.Mod or {})["Talisman"] = v
 		else
 			G.localization.misc.dictionary[k] = v
 		end
