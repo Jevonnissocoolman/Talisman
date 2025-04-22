@@ -25,14 +25,8 @@ function init_localization()
 		lovely.mod_dir .. "/Talisman/talisman_localization/en-us.lua"
 	)
 	for k, v in pairs(abc) do
-		if k == "mod_desc" then
-			if not G.localization.descriptions.Mod then
-				G.localization.descriptions.Mod = {} 
-			end
-			(G.localization.descriptions.Mod)["Talisman"] = v
-		else
-			G.localization.misc.dictionary[k] = v
-		end
+		-- todo mod description
+		G.localization.misc.dictionary[k] = v
 	end
 	talismanloc()
 end
