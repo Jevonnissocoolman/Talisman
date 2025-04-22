@@ -25,11 +25,10 @@ function init_localization()
 		lovely.mod_dir .. "/Talisman/localization/en-us.lua"
 	)
 	for k, v in pairs(abc) do
+		-- todo error messages(?)
 		if k ~= "descriptions" then
 			G.localization.misc.dictionary[k] = v
 		end
-		-- todo error messages(?)
-		G.localization.misc.dictionary[k] = v
 	end
 	talismanloc()
 end
