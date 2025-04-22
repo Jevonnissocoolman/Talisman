@@ -20,11 +20,10 @@ end
 
 local talismanloc = init_localization
 function init_localization()
-	local abc = assert(load(nativefs.read(lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua")))()
-	--local abc = load_file_with_fallback2(
-		--lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua",
-		--lovely.mod_dir .. "/Talisman/talisman_localization/en-us.lua"
-	--)
+	local abc = load_file_with_fallback2(
+		lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua",
+		lovely.mod_dir .. "/Talisman/talisman_localization/en-us.lua"
+	)
 	for k, v in pairs(abc) do
 		G.localization.misc.dictionary[k] = v
 	end
