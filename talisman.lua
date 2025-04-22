@@ -12,7 +12,7 @@ function talisman_load_file_with_fallback(primary_path, fallback_path)
         return fallback_result
     end
 end
-
+--[[
 -- these localization entires are called before the place they are usually created is initialized yet so they are created/pulled from a different place
 Talisman_misc_loc = talisman_load_file_with_fallback(
 	lovely.mod_dir .. "/Talisman/talisman_localization/" .. (G.SETTINGS.language or "en-us") .. ".lua",
@@ -29,6 +29,7 @@ end
 function localize2(args)
 	return G.PROFILES[G.SETTINGS.profile].talisman_localization[args] or 'ERROR'
 end
+]]--
 
 local talismanloc = init_localization
 function init_localization()
