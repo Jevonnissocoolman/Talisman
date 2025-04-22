@@ -20,7 +20,6 @@ end
 
 local talismanloc = init_localization
 function init_localization()
-	--Need to do localization like this since this needs to work without steamodded
 	local abc = load_file_with_fallback2(
 		lovely.mod_dir .. "/Talisman/localization/" .. (G.SETTINGS.language or "en-us") .. ".lua",
 		lovely.mod_dir .. "/Talisman/localization/en-us.lua"
@@ -29,7 +28,7 @@ function init_localization()
 		if k ~= "descriptions" then
 			G.localization.misc.dictionary[k] = v
 		end
-		-- todo mod description, error messages(?)
+		-- todo error messages(?)
 		G.localization.misc.dictionary[k] = v
 	end
 	talismanloc()
